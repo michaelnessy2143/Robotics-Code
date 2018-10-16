@@ -14,16 +14,16 @@ public class BasicOpMode_Iterative extends OpMode
 {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private Servo fLeftDrive;
-    private Servo fRightDrive;
-    private Servo bLeftDrive;
-    private Servo bRightDrive;
+    private Servo fLeftDrive;  //Front left wheel
+    private Servo fRightDrive;  //Front right wheel
+    private Servo bLeftDrive;  //Back left wheel
+    private Servo bRightDrive;  //Back right wheel
 
     //doubles for the speed of each motor (to change the multiple of the speed in the hardcode, it is in the moveServos method)
-    private double flds;
-    private double frds;
-    private double blds;
-    private double brds;
+    private double flds;  //Front left wheel
+    private double frds;  //Front right wheel
+    private double blds;  //Back left wheel
+    private double brds;  //Back right wheel
 
 
      //Code to run ONCE when the driver hits INIT
@@ -35,6 +35,8 @@ public class BasicOpMode_Iterative extends OpMode
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
+
+        //Basically means that we have to name them the same on the phone as they are named here
         fLeftDrive  = hardwareMap.get(Servo.class, "fLeftDrive");
         fRightDrive = hardwareMap.get(Servo.class, "fRightDrive");
         bLeftDrive = hardwareMap.get(Servo.class, "bLeftDrive");
@@ -58,7 +60,7 @@ public class BasicOpMode_Iterative extends OpMode
     }
 
     //Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
-
+    //this is the code that we used during TeleOP to drive around
     @Override
     public void loop() {
         double drive = -gamepad1.left_stick_y;
@@ -76,6 +78,7 @@ public class BasicOpMode_Iterative extends OpMode
             frds+=1;
         }
 
+        //Strafe left and right code below
         if(gamepad1.dpad_left) { //input for strafe left
             flds = -1;
             frds = -1;
@@ -102,8 +105,7 @@ public class BasicOpMode_Iterative extends OpMode
         telemetry.addData("Status", "Run Time: " + runtime.toString());
     }
 
-    //Code to run ONCE after the driver hits STOP
-
+    //This is the code that runs after the STOP button is hit(aka it turns off the robot)
     @Override
     public void stop() {
         fLeftDrive.setPosition(0);
