@@ -60,7 +60,7 @@ public class BasicOpMode_Iterative extends OpMode
     }
 
     //Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
-    //this is the code that we used during TeleOP to drive around
+    //this is the code that we use during TeleOP to drive around
     @Override
     public void loop() {
         double drive = -gamepad1.left_stick_y;
@@ -68,29 +68,29 @@ public class BasicOpMode_Iterative extends OpMode
 
         if(drive <=-0.2 || drive >=0.2) { //left stick must be at 1/5 tilt or more in order to change the drive speed
             flds = drive;
-            frds = drive;
+            frds = -drive;
             blds = drive;
-            brds = drive;
+            brds = -drive;
         }
         if(turn <=-0.2) { //left stick must be at 1/5 tilt or more in order to change the turn
             flds+=1;
         } else if(turn >=0.2) {
-            frds+=1;
+            frds-=1;
         }
 
         //Strafe left and right code below
         if(gamepad1.dpad_left) { //input for strafe left
             flds = -1;
-            frds = -1;
+            frds = 1;
             blds = 1;
-            brds = 1;
+            brds = -1;
 
 
         } else if(gamepad1.dpad_right) { //input for strafe right
             flds = 1;
-            frds = 1;
+            frds = -1;
             blds = -1;
-            brds = -1;
+            brds = 1;
         }
 
 
