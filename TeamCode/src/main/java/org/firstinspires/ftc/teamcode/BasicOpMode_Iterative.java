@@ -14,7 +14,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name="Basic: Iterative OpMode", group="Iterative Opmode")
-//@Disabled  //This needs to be committed out
+//@Disabled //This needs to be commented out other-wise the code wont run
 public class BasicOpMode_Iterative extends OpMode
 {
     // Declare OpMode members.
@@ -74,7 +74,7 @@ public class BasicOpMode_Iterative extends OpMode
             fRightDrive.setPower(1);
             bLeftDrive.setPower(-1);
             bRightDrive.setPower(-1);
-        } else if(drive <=-0.1 || drive >=0.1) { //if not strafing, move normally. left stick must be at 1/10 tilt or more in order to drive
+        } else if(drive <=-0.05 || drive >=0.05) { //if not strafing, move normally. left stick must be at 1/10 tilt or more in order to drive
             fLeftDrive.setPower(Range.clip(drive+turn, -1, 1));
             fRightDrive.setPower(Range.clip(-drive-turn, -1, 1));
             bLeftDrive.setPower(Range.clip(drive, -1, 1));
