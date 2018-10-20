@@ -64,21 +64,26 @@ public class BasicOpMode_Iterative extends OpMode
         double drive = -gamepad1.left_stick_y;
         double turn  =  gamepad1.right_stick_x;
 
-        if(gamepad1.dpad_left) { //input for strafe left
+        if(gamepad1.left_bumper) { //input for strafe left
             fLeftDrive.setPower(-1);
             fRightDrive.setPower(-1);
             bLeftDrive.setPower(1);
             bRightDrive.setPower(1);
-        } else if(gamepad1.dpad_right) { //input for strafe right
+        } else if(gamepad1.right_bumper) { //input for strafe right
             fLeftDrive.setPower(1);
             fRightDrive.setPower(1);
             bLeftDrive.setPower(-1);
             bRightDrive.setPower(-1);
-        } else if(drive <=-0.05 || drive >=0.05) { //if not strafing, move normally. left stick must be at 1/10 tilt or more in order to drive
+        } else if(drive <=-0.1 || drive >=0.1) { //if not strafing, move normally. left stick must be at 1/10 tilt or more in order to drive
             fLeftDrive.setPower(Range.clip(drive+turn, -1, 1));
             fRightDrive.setPower(Range.clip(-drive-turn, -1, 1));
             bLeftDrive.setPower(Range.clip(drive, -1, 1));
             fRightDrive.setPower(Range.clip(-drive, -1, 1));
+        } else {
+            fLeftDrive.setPower(0);
+            fRightDrive.setPower(0);
+            bLeftDrive.setPower(0);
+            bRightDrive.setPower(0);
         }
 
         telemetry.addData("Status", "Run Time: " + runtime.toString());
