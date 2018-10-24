@@ -113,13 +113,13 @@ public class BasicOpMode_Iterative extends OpMode
         }
 
         if(gamepad1.right_stick_x >= 0.3) {
-            fLeftDrive.setPower(1);
-            bLeftDrive.setPower(1);
+            fLeftDrive.setPower(-1);
+            bLeftDrive.setPower(-1);
             fRightDrive.setPower(-1);
             bRightDrive.setPower(-1);
         } else if(gamepad1.right_stick_x <= -0.3) {
-            fLeftDrive.setPower(-1);
-            bLeftDrive.setPower(-1);
+            fLeftDrive.setPower(1);
+            bLeftDrive.setPower(1);
             fRightDrive.setPower(1);
             bRightDrive.setPower(1);
         }
