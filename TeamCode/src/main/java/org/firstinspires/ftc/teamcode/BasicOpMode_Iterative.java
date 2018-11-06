@@ -14,11 +14,11 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name="Basic: Iterative OpMode", group="Iterative Opmode")
-//@Disabled //This needs to be commented out other-wise the code wont run
+//@Disabled //This needs to be commented out otherwise the code wont run
 public class BasicOpMode_Iterative extends OpMode
 {
     // Declare OpMode members.game
-    private ElapsedTime runtime = new ElapsedTime();
+    //private ElapsedTime runtime = new ElapsedTime();
     private DcMotor fLeftDrive;  //Front left wheel
     private DcMotor fRightDrive;  //Front right wheel
     private DcMotor bLeftDrive;  //Back left wheel
@@ -40,7 +40,7 @@ public class BasicOpMode_Iterative extends OpMode
         // step (using the FTC Robot Controller app on the phone).
 
         //Basically means that we have to name them the exact same on the phone as they are named here
-        fLeftDrive  = hardwareMap.get(DcMotor.class, "fLeftDrive");
+        fLeftDrive = hardwareMap.get(DcMotor.class, "fLeftDrive");
         fRightDrive = hardwareMap.get(DcMotor.class, "fRightDrive");
         bLeftDrive = hardwareMap.get(DcMotor.class, "bLeftDrive");
         bRightDrive = hardwareMap.get(DcMotor.class, "bRightDrive");
@@ -48,7 +48,7 @@ public class BasicOpMode_Iterative extends OpMode
         lScissorLift = hardwareMap.get(DcMotor.class, "lScissorLift");
         rScissorLift = hardwareMap.get(DcMotor.class, "rScissorLift");
 
-        shimmycount = 0;
+        double shimmycount = 0;
 
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
@@ -64,7 +64,7 @@ public class BasicOpMode_Iterative extends OpMode
 
     @Override
     public void start() {
-        runtime.reset();
+        //runtime.reset();
     }
 
     //Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
@@ -104,12 +104,12 @@ public class BasicOpMode_Iterative extends OpMode
 
         if(gamepad1.a) {
             lScissorLift.setPower(1);
-            rScissorLift.setPower(-1);
+            rScissorLift.setPower(1);
         } else if(gamepad1.b) {
-            lScissorLift.setPower(-1);
+            lScissorLift.setPower(1);
             rScissorLift.setPower(1);
         } else if(gamepad1.y) {
-            shimmy(shimmycount);
+            shimmy();
         }
 
         if(gamepad1.right_stick_x >= 0.3) {
@@ -123,16 +123,16 @@ public class BasicOpMode_Iterative extends OpMode
             fRightDrive.setPower(1);
             bRightDrive.setPower(1);
         }
-        telemetry.addData("Status", "Run Time: " + runtime.toString());
-        telemetry.addData("Motors", "front left (%.2f), front right (%.2f), back left (%.2f), back right(%.2f)", fLeftDrive.getPower(), fRightDrive.getPower(), bLeftDrive.getPower(), bRightDrive.getPower());
+        //telemetry.addData("Status", "Run Time: " + runtime.toString());
+        telemetry.addData("Motors", "front left (%.2f), front right (%.2f), back left (%.2f), back right (%.2f); scissor lift left (%.2f), scissor lift right (%.2f)", fLeftDrive.getPower(), fRightDrive.getPower(), bLeftDrive.getPower(), bRightDrive.getPower(), lScissorLift.getPower(), rScissorLift.getPower());
     }
 
     //This is the code that runs after the STOP button is hit(aka it turns off the robot )
-    @Override
+    //@Override
     public void stop() {
     }
-    public void shimmy(double count) {
-        if(count%50<25) {
+    public void shimmy() {
+        if(shimmycount%100<25) {
             lScissorLift.setPower(1);
         } else {
             rScissorLift.setPower(1);
